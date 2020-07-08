@@ -1,0 +1,50 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(plotly)
+library(GGally)
+library(ggplot2)
+library(viridis)
+```
+ 
+
+```{r}
+BPF <- read.csv("BPF-UN.TO.csv")
+BPY <- read.csv("BPY-UN.TO.csv")
+POW <- read.csv("POW.TO.csv")
+ENB <- read.csv("ENB.TO.csv")
+BCE <- read.csv("BCE.TO.csv")
+MFC <- read.csv("MFC.TO.csv")
+CHE <- read.csv("CHE-UN.TO.csv")
+BNS <- read.csv("BNS.TO.csv")
+```
+
+```{r}
+Closes <- data.frame("Date" = BPF$Date, "Stock A" = BPF$Close, "Stock B" = BPY$Close, "Stock C" = POW$Close, "Stock D" = ENB$Close, "Stock E" = BCE$Close, "Stock F" = MFC$Close, "Stock G" = CHE$Close, "Stock H" = BNS$Close)
+Closes
+```
+```{r}
+pairs(Closes[2:9])
+```
+```{r}
+cor.test(Closes$Stock.A, Closes$Stock.B)
+```
+
+```{r}
+cor.test(Closes$Stock.A, Closes$Stock.D)
+```
+```{r}
+ggpairs(Closes,
+        columns = 2:9,
+        
+        title ="Portfolio Correlations",
+        progress = FALSE)
+
+
+
+```    
+
+
